@@ -43,6 +43,9 @@ public class InputFoodsValidator {
 
     private static void validateFoodExists(String[] parsedFoods){
         for(String food : parsedFoods){
+            if(food.equals("")){
+                continue;
+            }
             boolean isCategoryValid = Categories.stream()
                     .anyMatch(category -> category.getFoods().contains(food));
 

@@ -1,5 +1,7 @@
 package menu.domain;
 
+import java.util.Objects;
+
 public class Coach {
     private String name;
 

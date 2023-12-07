@@ -1,6 +1,7 @@
 package menu.controller;
 
 import static menu.view.InputView.*;
+import static menu.view.OutputView.*;
 
 import java.util.List;
 import menu.domain.Coach;
@@ -14,6 +15,7 @@ import menu.service.RecommendService;
 import menu.validator.InputCoachesValidator;
 import menu.validator.InputFoodsValidator;
 import menu.view.InputView;
+import menu.view.OutputView;
 
 public class MenuRecommendController {
 
@@ -26,6 +28,7 @@ public class MenuRecommendController {
     }
 
     public void run() {
+        printStartMessage();
         Coaches coaches = getCoaches();
         CoachFood coachMenus = getCoachMenus(coaches);
     }

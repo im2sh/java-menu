@@ -5,10 +5,7 @@ import static menu.view.constants.ViewMessage.*;
 import static menu.view.constants.ViewMessage.RESULT_MESSAGE;
 import static menu.view.constants.ViewMessage.START_MESSAGE;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import menu.domain.Coach;
 import menu.domain.SelectedCoachFood;
@@ -62,11 +59,27 @@ public class OutputView {
 
         distinctCoaches.forEach(coach -> {
             System.out.print("[ " + coach.getName() + " | ");
-            String foodsForCoach = recommendMenus.stream()
-                    .map(selectedCoachFood -> getFoodForCoach(selectedCoachFood, coach))
-                    .collect(Collectors.joining(" | "));
-            System.out.println(foodsForCoach + " ]");
+            recommendMenus.forEach(menu -> {
+                System.out.print(getFoodForCoach(menu, coach));
+                if (recommendMenus.indexOf(menu) < recommendMenus.size() - 1) {
+                    System.out.print(" | ");
+                }
+            });
+            System.out.println(" ]");
         });
+    }
+
+    private static String getDayOfWeek(int day) {
+        String[] daysOfWeek = {"월요일", "화요일", "수요일", "목요일", "금요일"};
+        return daysOfWeek[day];
+    }
+
+    private static List<Coach> getDistinctCoaches(List<SelectedCoachFood> selectedCoachFoods) {
+        return selectedCoachFoods.stream()
+                .flatMap(selectedCoachFood -> selectedCoachFood.getWeekCoachesFoods().stream())
+                .map(WeekCoachFood::getCoach)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     private static String getFoodForCoach(SelectedCoachFood selectedCoachFood, Coach coach) {
@@ -77,19 +90,4 @@ public class OutputView {
                 .orElse("");
     }
 
-    private static String getDayOfWeek(int day) {
-        String[] daysOfWeek = {"월요일", "화요일", "수요일", "목요일", "금요일"};
-        return daysOfWeek[day];
-    }
-
-    private static List<Coach> getDistinctCoaches(List<SelectedCoachFood> selectedCoachFoods) {
-        Set<Coach> distinctCoaches = new LinkedHashSet<>();
-
-        selectedCoachFoods.stream()
-                .flatMap(selectedCoachFood -> selectedCoachFood.getWeekCoachesFoods().stream())
-                .map(WeekCoachFood::getCoach)
-                .forEach(distinctCoaches::add);
-
-        return new ArrayList<>(distinctCoaches);
-    }
 }

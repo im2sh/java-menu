@@ -3,19 +3,14 @@ package menu.controller;
 import static menu.view.InputView.*;
 import static menu.view.OutputView.*;
 
-import java.util.List;
 import menu.domain.Coach;
 import menu.domain.CoachFood;
 import menu.domain.Coaches;
 import menu.domain.Foods;
 import menu.exception.GlobalRetryHandler;
-import menu.service.CoachService;
-import menu.service.FoodService;
 import menu.service.RecommendService;
 import menu.validator.InputCoachesValidator;
 import menu.validator.InputFoodsValidator;
-import menu.view.InputView;
-import menu.view.OutputView;
 
 public class MenuRecommendController {
 
@@ -31,6 +26,7 @@ public class MenuRecommendController {
         printStartMessage();
         Coaches coaches = getCoaches();
         CoachFood coachMenus = getCoachMenus(coaches);
+        recommendService.recommend(coachMenus);
     }
 
     private Coaches getCoaches(){

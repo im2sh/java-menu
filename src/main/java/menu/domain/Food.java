@@ -7,5 +7,7 @@ public class Food {
         this.name = name;
     }
 
-
+    public String getName() {
+        return name;
+    }
 }

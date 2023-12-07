@@ -12,4 +12,8 @@ public class Foods {
     public List<Food> getFoods() {
         return foods;
     }
+
+    public void addFood(Food food) {
+        foods.add(food);
+    }
 }

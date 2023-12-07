@@ -13,4 +13,8 @@ public enum Categories {
     Categories(List<String> foods) {
         this.foods = foods;
     }
+
+    public List<String> getFoods() {
+        return foods;
+    }
 }

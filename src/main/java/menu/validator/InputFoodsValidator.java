@@ -4,7 +4,9 @@ import static menu.constants.Common.*;
 import static menu.exception.GlobalException.*;
 
 import java.util.Arrays;
+import menu.domain.Categories;
 import menu.domain.Foods;
+import menu.exception.GlobalException;
 import menu.utils.Parser;
 
 public class InputFoodsValidator {
@@ -13,6 +15,7 @@ public class InputFoodsValidator {
         validateMenuKorean(parsedFoods);
         validateDuplicateMenu(parsedFoods);
         validateMenuSize(parsedFoods);
+        validateFoodExists(parsedFoods);
         return Parser.parserFood(parsedFoods);
     }
 
@@ -38,4 +41,14 @@ public class InputFoodsValidator {
         }
     }
 
+    private static void validateFoodExists(String[] parsedFoods){
+        for(String food : parsedFoods){
+            boolean isCategoryValid = Categories.stream()
+                    .anyMatch(category -> category.getFoods().contains(food));
+
+            if (!isCategoryValid) {
+                throw new IllegalArgumentException(GlobalException.INVALID_FOOD.getErrorMessage());
+            }
+        }
+    }
 }

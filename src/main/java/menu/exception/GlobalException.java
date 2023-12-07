@@ -8,7 +8,7 @@ public enum GlobalException {
     MENU_SIZE("메뉴는 2개 이하로 입력해주세요."),
     DUPLICATE("중복되지 않게 입력해주세요."),
     INPUT_KOREAN("한글로만 입력해 주세요."),
-    ;
+    INVALID_FOOD("입력된 음식은 존재하지 않습니다.");
     private final String errorMessage;
 
     GlobalException(String errorMessage) {

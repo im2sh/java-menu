@@ -4,16 +4,15 @@ import java.util.function.Supplier;
 import menu.view.OutputView;
 
 public class GlobalRetryHandler {
-    private final OutputView outputView = new OutputView();
 
     public <T> T getOrRetry(Supplier<T> supplier) {
         while (true) {
             try {
                 return supplier.get();
             } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e);
+                OutputView.printErrorMessage(e);
             } finally {
-                outputView.printNewLine();
+                OutputView.printNewLine();
             }
         }
     }
@@ -24,9 +23,9 @@ public class GlobalRetryHandler {
                 runnable.run();
                 return;
             } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e);
+                OutputView.printErrorMessage(e);
             } finally {
-                outputView.printNewLine();
+                OutputView.printNewLine();
             }
         }
     }

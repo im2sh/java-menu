@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import menu.domain.Coach;
 import menu.domain.Coaches;
+import menu.domain.Food;
+import menu.domain.Foods;
 
 public class Parser {
 
@@ -15,5 +17,15 @@ public class Parser {
         }
         Coaches coaches = new Coaches(parsedCoaches);
         return coaches;
+    }
+
+    public static Foods parserFood(String[] inputFoods) {
+        List<Food> parsedFoods = new ArrayList<>();
+        for(String parsedFood : inputFoods){
+            Food food = new Food(parsedFood);
+            parsedFoods.add(food);
+        }
+        Foods foods = new Foods(parsedFoods);
+        return foods;
     }
 }

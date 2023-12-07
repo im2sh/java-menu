@@ -1,10 +1,11 @@
 package menu.validator;
 
 import static menu.constants.Common.COMMA;
-import static menu.exception.GlobalException.COACH_DUPLICATE;
-import static menu.exception.GlobalException.COACH_KOREAN;
+import static menu.constants.Common.regex;
 import static menu.exception.GlobalException.COACH_LENGTH;
 import static menu.exception.GlobalException.COACH_SIZE;
+import static menu.exception.GlobalException.DUPLICATE;
+import static menu.exception.GlobalException.INPUT_KOREAN;
 
 import java.util.Arrays;
 import menu.domain.Coaches;
@@ -22,11 +23,12 @@ public class InputCoachesValidator {
 
     private static void validateCoachKorean(String[] parsedCoaches) {
         for (String coach : parsedCoaches) {
-            if (!coach.matches("^[가-힣]*$")) {
-                throw new IllegalArgumentException(COACH_KOREAN.getErrorMessage());
+            if (!coach.matches(regex.getCommon())) {
+                throw new IllegalArgumentException(INPUT_KOREAN.getErrorMessage());
             }
         }
     }
+
     private static void validateCoachSize(String[] parsedCoaches) {
         if (parsedCoaches.length < 2 || parsedCoaches.length > 5) {
             throw new IllegalArgumentException(COACH_SIZE.getErrorMessage());
@@ -45,7 +47,7 @@ public class InputCoachesValidator {
         if (Arrays.stream(parsedCoaches)
                 .distinct()
                 .count() != parsedCoaches.length) {
-            throw new IllegalArgumentException(COACH_DUPLICATE.getErrorMessage());
+            throw new IllegalArgumentException(DUPLICATE.getErrorMessage());
         }
     }
 

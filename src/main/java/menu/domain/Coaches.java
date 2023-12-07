@@ -8,4 +8,8 @@ public class Coaches {
     public Coaches(List<Coach> coaches) {
         this.coaches = coaches;
     }
+
+    public List<Coach> getCoaches() {
+        return coaches;
+    }
 }
